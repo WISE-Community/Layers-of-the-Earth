@@ -1,0 +1,88 @@
+<style>
+  .layer {
+    cursor: pointer;
+  }
+  .layer:hover {
+    fill: rgb(50, 205, 50, 0.6);
+  }
+</style>
+<script>
+  function setImage(layerName) {
+    document.getElementById('layerImage').setAttribute('xlink:href', `${layerName}.jpg`);
+  }
+</script>
+<svg width="642" height="442" style="display: block; margin: auto">
+  <image
+    id="layerImage"
+    xlink:href="main.jpg"
+    width="642"
+    height="442"
+    onclick="setImage('main')"
+  ></image>
+  <rect
+    x="30"
+    y="160"
+    width="65"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('crust')"
+  />
+  <rect
+    x="45"
+    y="210"
+    width="75"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('mantle')"
+  />
+  <rect
+    x="140"
+    y="145"
+    width="110"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('outer-core')"
+  />
+  <rect
+    x="140"
+    y="206"
+    width="110"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('inner-core')"
+  />
+  <rect
+    x="355"
+    y="68"
+    width="110"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('lithosphere')"
+  />
+  <rect
+    x="345"
+    y="100"
+    width="130"
+    height="30"
+    stroke="black"
+    fill="transparent"
+    stroke-width="1"
+    class="layer"
+    onclick="setImage('asthenosphere')"
+  />
+</svg>
