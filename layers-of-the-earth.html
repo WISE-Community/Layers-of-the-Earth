@@ -1,88 +1,228 @@
 <style>
-  .layer {
-    cursor: pointer;
+  html {
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
   }
+
+  body {
+    margin: 0;
+    padding: 8px;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    margin: 8px 0;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  #layers {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 410px;
+  }
+
   .layer:hover {
     fill: rgb(50, 205, 50, 0.6);
+  }
+
+  .layer-description {
+    border: 2px solid black;
+    border-radius: 6px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 8px;
+    background-color: black;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
   }
 </style>
 <script>
   function setImage(layerName) {
+    event.preventDefault();
     document.getElementById('layerImage').setAttribute('xlink:href', `${layerName}.jpg`);
+    var tabs = document.querySelectorAll('[role=tab]');
+    for (t = 0; t < tabs.length; t++) {
+      tabs[t].setAttribute('aria-selected', false);
+    }
+    event.currentTarget.setAttribute('aria-selected', 'true');
+    var panels = document.querySelectorAll('[role=tabpanel]');
+    for (p = 0; p < panels.length; p++) {
+      panels[p].setAttribute('hidden', true);
+    }
+    document.getElementById(`${layerName}-description`).removeAttribute('hidden');
   }
 </script>
-<svg width="642" height="442" style="display: block; margin: auto">
-  <image
-    id="layerImage"
-    xlink:href="main.jpg"
-    width="642"
-    height="442"
-    onclick="setImage('main')"
-  ></image>
-  <rect
-    x="30"
-    y="160"
-    width="65"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('crust')"
-  />
-  <rect
-    x="45"
-    y="210"
-    width="75"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('mantle')"
-  />
-  <rect
-    x="140"
-    y="145"
-    width="110"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('outer-core')"
-  />
-  <rect
-    x="140"
-    y="206"
-    width="110"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('inner-core')"
-  />
-  <rect
-    x="355"
-    y="68"
-    width="110"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('lithosphere')"
-  />
-  <rect
-    x="345"
-    y="100"
-    width="130"
-    height="30"
-    stroke="black"
-    fill="transparent"
-    stroke-width="1"
-    class="layer"
-    onclick="setImage('asthenosphere')"
-  />
+<h4>To learn more about the interior of the Earth, click on each of the layers below.</h4>
+<svg id="layers"
+     viewBox="0 0 642 410"
+     width="642"
+     height="410"
+     style="display: block; margin: auto; max-width: 100%;"
+     role="tablist">
+  <desc>This is an graphic showing the layers of the Earth. Each layer can be selected, which will
+    display text describing the corresponding layer below this image.</desc>
+  <a href="#"
+     aria-label="Clear selection"
+     onclick="setImage('main')">
+    <image id="layerImage"
+           xlink:href="main.jpg"
+           width="642"
+           height="442"></image>
+  </a>
+  <a id="crust"
+     href="#"
+     aria-label="Crust"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('crust')">
+    <rect x="30"
+          y="143"
+          width="65"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
+  <a id="mantle"
+     href="#"
+     aria-label="Mantle"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('mantle')">
+    <rect x="45"
+          y="193"
+          width="75"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
+  <a id="outer-core"
+     href="#"
+     aria-label="Outer Core"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('outer-core')">
+    <rect x="140"
+          y="128"
+          width="110"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
+  <a id="inner-core"
+     href="#"
+     aria-label="Inner Core"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('inner-core')">
+    <rect x="140"
+          y="190"
+          width="110"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
+  <a id="lithosphere"
+     href="#"
+     aria-label="Lithosphere"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('lithosphere')">
+    <rect x="355"
+          y="52"
+          width="110"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
+  <a id="asthenosphere"
+     href="#"
+     aria-label="Asthenosphere"
+     role="tab"
+     aria-selected="false"
+     onclick="setImage('asthenosphere')">
+    <rect x="345"
+          y="84"
+          width="130"
+          height="30"
+          stroke="black"
+          fill="transparent"
+          stroke-width="1"
+          class="layer" />
+  </a>
 </svg>
+<div id="crust-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="crust"
+     hidden>
+  <p>The <b>crust</b> is the outermost layer of the Earth.</p>
+  <p>It is a <b>solid</b> layer that includes both dry land (continental crust) and the ocean floor
+    (oceanic crust).</p>
+</div>
+<div id="mantle-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="mantle"
+     hidden>
+  <p>The <b>mantle</b> layer begins about 25 miles below the surface.</p>
+  <p>It is a <b>mostly solid</b> layer of very hot rock. Parts of it can flow very slowly like a
+    fluid because of intense heat and pressure. It moves much slower than your fingernails grow. It
+    takes about 100 million years for rock in the mantle to move between the crust and the outer
+    core.</p>
+</div>
+<div id="outer-core-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="outer-core"
+     hidden>
+  <p>The <b>outer core</b> is a <b>liquid</b> layer of melted metal, mainly iron and nickle.</p>
+</div>
+<div id="inner-core-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="inner-core"
+     hidden>
+  <p>The <b>inner core</b> is a <b>solid</b> layer of iron and nickle.</p>
+</div>
+<div id="lithosphere-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="lithosphere"
+     hidden>
+  <p>The <b>lithosphere</b> is a combination of the crust and the uppermost layer of the mantle.</p>
+  <p>It is very rigid nd does not flow. It contains the <b>tectonic plates</b>.</p>
+</div>
+<div id="asthenosphere-description"
+     class="layer-description"
+     role="tabpanel"
+     aria-labelledby="asthenosphere"
+     hidden>
+  <p>The <b>asthenosphere</b> is the layer of the mantle beneath the lithosphere.</p>
+  <p>It is <b>mostly solid</b> rock. Parts of it can flow very slowly like a fluid because of
+    intense heat and pressure. It moves much slower than your fingernails grow. It takes about 100
+    million years for rock in the mantle to move between the crust and the outer core.</p>
+</div>
