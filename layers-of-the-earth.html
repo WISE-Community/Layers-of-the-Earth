@@ -63,7 +63,10 @@
     for (p = 0; p < panels.length; p++) {
       panels[p].setAttribute('hidden', true);
     }
-    document.getElementById(`${layerName}-description`).removeAttribute('hidden');
+    var description = document.getElementById(`${layerName}-description`);
+    if (description != null) {
+      description.removeAttribute('hidden');
+    }
   }
 </script>
 <h4>To learn more about the interior of the Earth, click on each of the layers below.</h4>
